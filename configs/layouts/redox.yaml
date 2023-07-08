@@ -1,0 +1,40 @@
+keys:
+  # 1u
+  r1:
+    base: R1
+    width: 1.0
+  r2:
+    base: R2
+    width: 1.0
+  r3:
+    base: R3
+    width: 1.0
+  r4:
+    base: R4
+    width: 1.0
+  # 1.25u
+  r1_mid:
+    base: R1
+    width: 1.25
+  r2_mid:
+    base: R2
+    width: 1.25
+  r3_mid:
+    base: R3
+    width: 1.25
+  r4_mid:
+    base: R4
+    width: 1.25
+  # 1.5u
+  r1_wide:
+    base: R1
+    width: 1.5
+  r4_wide:
+    base: R4
+    width: 1.5
+  # Convex
+  r1_wide_convex:
+    base: R1
+    modifiers:
+      - convex
+    width: 1.5
