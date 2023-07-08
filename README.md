@@ -51,7 +51,7 @@ Then, the layout describes the key widths that are required for each row.
 It can use the modifiers to asks for special keys, such as a convex space bar.
 Additionally, it can ignore the style entirely, and manually override the properties of any keys
 
-> See the `config` folder for configuration examples.
+> See the `configs` folder for configuration examples.
 
 The styles configuration consists of three lists:
 - `global`: These options are automatically inherited by all keys.
@@ -64,5 +64,5 @@ Each can define (all optional):
 - `modifiers`: A list of any number of modifiers to inherit.
 - Any additional options.
 
-The default style `config/styles/default.yaml` describes all available options.
+The default style `configs/styles/default.yaml` describes all available options.
 
