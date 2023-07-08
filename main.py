@@ -25,11 +25,11 @@ if __name__ == '__main__':
 
     print(f"Generating {len(layout['keys'])} keys...")
     for key_name, key_conf in tqdm(layout['keys'].items()):
-        base = key_conf.pop('base', {})
+        base = key_conf.pop('base', '')
         modifiers = key_conf.pop('modifiers', [])
         config = (
                 style['global'] |
-                style['bases'][base] |
+                style['bases'].get(base, {}) |
                 key_conf
         )
         for mod in modifiers:

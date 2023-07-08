@@ -7,6 +7,11 @@
 Easily generate custom keycap sets for 3d-printing.
 This is primarily intended for strange key layouts, such as ergonomic or split keyboards, where pre-made keycap sets are hard to find.
 
+![Example keycap (stl)](img/r1.stl)
+![Example keycaps (render, front)](img/render_front.png)
+![Example keycaps (render, back)](img/render_back.png)
+![Example keycap (drawing)](img/drawing.svg)
+
 ## Dependencies
 Requires Python 3.11.
 Slightly older versions may work but have not been tested.

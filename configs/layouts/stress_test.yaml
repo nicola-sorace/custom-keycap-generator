@@ -1,0 +1,38 @@
+# This layout generates a varied set of keys, for testing purposes
+
+keys:
+  a:
+    base: R1
+    width: 1.0
+  b:
+    base: R4
+    width: 1.25
+    key_r: 2.0
+    back_curve: 1.0
+    front_curve: 1.0
+  c:
+    base: R2
+    width: 1.0
+    key_r: 5.0
+    back_curve: -1.0
+    front_curve: -1.0
+  d:
+    base: R3
+    width: 1.5
+    key_r: 0.0
+    back_curve: 0.0
+    front_curve: 0.0
+  e:
+    front_dy: 6.0
+    back_dy: 6.0
+    width: 1.5
+    key_r: 1.0
+    back_curve: -1.0
+    front_curve: -1.0
+  f:
+    front_dy: 10.0
+    back_dy: 10.0
+    width: 3.0
+    key_r: 2.0
+    back_curve: -2.0
+    front_curve: -1.0

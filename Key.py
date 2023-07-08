@@ -140,11 +140,12 @@ class Key:
             loft(mode=Mode.INTERSECT)
 
             # Finally, round off the edges
-            edges = part.edges().group_by(Axis.Z)[1:]
-            fillet(
-                sum(edges[1:], edges[0]),
-                key_r
-            )
+            if key_r > 0.0:
+                edges = part.edges().group_by(Axis.Z)[1:]
+                fillet(
+                    sum(edges[1:], edges[0]),
+                    key_r
+                )
         return part.part
 
     def _stem(self) -> Part:
@@ -201,7 +202,7 @@ class Key:
         with BuildPart() as top_block:
             with Locations((0.0, 0.0, self.stem_depth + self.inner_rad)):
                 Box(
-                    2*self.key_h, 2*self.key_w, self.max_height,
+                    2*self.key_w, 2*self.key_h, self.max_height,
                     align=(Align.CENTER, Align.CENTER, Align.MIN)
                 )
         filler = outer_profile & top_block.part
