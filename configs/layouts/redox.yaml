@@ -38,3 +38,17 @@ keys:
     modifiers:
       - convex
     width: 1.5
+  r1_mid_convex:
+    base: R1
+    modifiers:
+      - convex
+    width: 1.25
+  r1_convex:
+    base: R1
+    modifiers:
+      - convex
+    width: 1.0
+  r2_bump:
+    base: R1
+    bump: True
+    width: 1.0
