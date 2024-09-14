@@ -5,12 +5,12 @@ global:
   # Manufacturing tolerance (sliding)
   tol: 0.5
   # Manufacturing tolerance (friction-fit)
-  tol_tight: 0.5
+  tol_tight: 0.1
   # Wall thickness
   wall: 1.2
   # Rounding radius for inside edges (temperamental!)
-#  inner_rad: 0.2
-  inner_rad: 0.0
+  inner_rad: 0.2
+  # inner_rad: 0.0
 
   # Key height
   key_h: 18.0

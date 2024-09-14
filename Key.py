@@ -22,7 +22,7 @@ class KeyConfig:
     front_dy: float
     back_dy: float
     width: float  # As a multiple of `key_h`
-
+    bump: bool = False
 
 class Key:
     def __init__(self, config: KeyConfig):
@@ -54,6 +54,8 @@ class Key:
         self.cross_thick = 1.17 + self.tol_tight
         self.stem_depth = 3.8 + self.tol
         self.stem_rad = 0.3
+
+        self.bump = config.bump
 
     def _outer_key_profile(self, shift: float = 0.0) -> Part:
         """
@@ -218,4 +220,15 @@ class Key:
                 self.inner_rad - self.eps,
                 shape.faces().filter_by(Axis.Z).group_by(Axis.Z)[2][0].edges()
             )
+        
+        if self.bump:
+            with BuildPart() as bump:
+                y = self.stem_depth + self.inner_rad + self.eps
+                with BuildSketch(Plane.XY.offset(y)) as sketch:
+                    with Locations((0, -0.2 * self.key_h)):
+                        Rectangle(6, 2)
+                    fillet(sketch.vertices(), 0.999)
+                extrude(amount=self.max_front_height - y - 2)
+            shape += bump.part
+
         return shape
