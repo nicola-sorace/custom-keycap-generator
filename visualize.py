@@ -1,7 +1,8 @@
 from build123d import *
-from Key import KeyConfig, Key
+from key import KeyConfig, Key
 from ocp_vscode import show
 import yaml
+from stem import stem_from_config
 
 style = 'default'
 layout = 'redox'
@@ -23,7 +24,8 @@ if __name__ == '__main__':
     )
     for mod in modifiers:
         config = config | style['modifiers'][mod]
-    config = KeyConfig(**config)
-    key = Key(config)
+    stem = stem_from_config(**config.pop('stem', {}))
+    key_config = KeyConfig(**config)
+    key = Key(key_config, stem)
 
     show(key.shape())

@@ -1,6 +1,7 @@
 from build123d import *
 import numpy as np
 from dataclasses import dataclass
+from stem import Stem
 
 
 @dataclass
@@ -25,7 +26,7 @@ class KeyConfig:
     bump: bool = False
 
 class Key:
-    def __init__(self, config: KeyConfig):
+    def __init__(self, config: KeyConfig, stem: Stem):
         self.tol = config.tol
         self.tol_tight = config.tol_tight
         self.wall = config.wall
@@ -56,6 +57,8 @@ class Key:
         self.stem_rad = 0.3
 
         self.bump = config.bump
+
+        self.stem = stem
 
     def _outer_key_profile(self, shift: float = 0.0) -> Part:
         """
@@ -150,46 +153,6 @@ class Key:
                 )
         return part.part
 
-    def _stem(self) -> Part:
-        """
-        Generates the geometry that fits onto key switch stems
-        """
-        with BuildPart() as cross:
-            # Draw the stem profile and extrude
-            with BuildSketch(Plane.XY):
-                RectangleRounded(
-                    self.cross_height + 2*self.wall,
-                    self.cross_height - self.tol,
-                    radius=self.wall
-                )
-
-                with BuildLine() as line:
-                    h = self.cross_height / 2
-                    t = self.cross_thick / 2
-                    Polyline(
-                        (-h, 0), (-h, t), (-t, t), (-t, h), (0, h)
-                    )
-                    mirror(line.line, about=Plane.XZ)
-                    mirror(line.line, about=Plane.YZ)
-                make_face(mode=Mode.SUBTRACT)
-            stem = extrude(amount=self.stem_depth + self.inner_rad)
-            # Alternative to the above line (more flexible, less robust):
-            # stem = extrude(until=Until.NEXT)
-
-            # Round edges along extrusion axis
-            fillet(stem.edges().filter_by(Axis.Z), self.stem_rad)
-
-            # Extrude a base for the stem if `inner_rad` is defined
-            if self.inner_rad > 0.0:
-                with BuildSketch(Plane.XY.offset(self.stem_depth + self.inner_rad)):
-                    RectangleRounded(
-                        self.cross_height + 2*self.wall,
-                        self.cross_height - self.tol,
-                        radius=self.wall
-                    )
-                extrude(amount=-self.inner_rad)
-        return cross.part
-
     def shape(self) -> Part:
         """
         Constructs the key's complete shape
@@ -210,15 +173,15 @@ class Key:
         filler = outer_profile & top_block.part
 
         # Add the stem
-        cross = self._stem()
+        cross = self.stem.build(self)
         shape = shell + filler + cross
 
         # Fillet some inside edges, for a bit more strength
         # (this can easily crash if `inner_rad` is too large)
         if self.inner_rad > 0.0:
             shape = shape.fillet(
-                self.inner_rad - self.eps,
-                shape.faces().filter_by(Axis.Z).group_by(Axis.Z)[2][0].edges()
+                edge_list=self.stem.select_inner_rad_edges(self, shape),
+                radius=self.inner_rad - self.eps,
             )
         
         if self.bump:
