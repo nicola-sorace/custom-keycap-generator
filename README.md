@@ -2,7 +2,7 @@
 
 > Work in progress. Contributions welcome!
 > 
-> Intended to fit CherryMX switches, but compatibility is not guaranteed.
+> Intended to fit Cherry MX switches, but compatibility is not guaranteed.
 
 Easily generate custom keycap sets for 3d-printing.
 This is primarily intended for strange key layouts, such as ergonomic or split keyboards, where pre-made keycap sets are hard to find.
@@ -69,5 +69,12 @@ Each can define (all optional):
 - `modifiers`: A list of any number of modifiers to inherit.
 - Any additional options.
 
-The default style `configs/styles/default.yaml` describes all available options.
+Three stem styles are provided:
+- `formal`: Standard Cherry MX profile
+![Formal](img/stem_formal.png)
+- `reinforced`: Adds extra material to the standard profile, for more strength
+![Reinforced](img/stem_reinforced.png)
+- `minimal`: (not recommended) Minimalist stem, originally designed for a low-quality 3D printer to avoid thin walls
+![Minimal](img/stem_minimal.png)
 
+The default style `configs/styles/default.yaml` describes all available options.

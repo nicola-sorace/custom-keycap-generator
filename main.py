@@ -3,7 +3,8 @@ import argparse
 import os
 import yaml
 from tqdm import tqdm
-from Key import KeyConfig, Key
+from key import KeyConfig, Key
+from stem import stem_from_config
 
 parser = argparse.ArgumentParser(
     "Custom Keycap Generator",
@@ -34,8 +35,9 @@ if __name__ == '__main__':
         )
         for mod in modifiers:
             config = config | style['modifiers'][mod]
-        config = KeyConfig(**config)
-        key = Key(config)
+        stem = stem_from_config(**config.pop('stem', {}))
+        key_config = KeyConfig(**config)
+        key = Key(key_config, stem)
 
         out_path = os.path.join(args.output_path, f"{key_name}.{args.format}")
         if args.format == 'stl':
