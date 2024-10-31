@@ -71,10 +71,10 @@ Each can define (all optional):
 
 Three stem styles are provided:
 - `formal`: Standard Cherry MX profile
-![Formal](img/stem_formal.png)
+<img src="img/stem_formal.png" width="200px" />
 - `reinforced`: Adds extra material to the standard profile, for more strength
-![Reinforced](img/stem_reinforced.png)
+<img src="img/stem_reinforced.png" width="200px" />
 - `minimal`: (not recommended) Minimalist stem, originally designed for a low-quality 3D printer to avoid thin walls
-![Minimal](img/stem_minimal.png)
+<img src="img/stem_minimal.png" width="200px" />
 
 The default style `configs/styles/default.yaml` describes all available options.
